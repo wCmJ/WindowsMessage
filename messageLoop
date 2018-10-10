@@ -1,0 +1,21 @@
+Each Windows message may have up to two parameters, wParam and lParam.
+wParam contains two values, HIWORD and LOWORD
+HIWORD is the notifacation message(if applicable)
+LOWORD is the control or menu id that sent the message.
+lParam is the HWND(window handle) to the control which sent the message or NULL if the messages isn't from a control.
+a Message Loop:
+    while(GetMessage(&Msg,NULL,0,0) > 0):
+    {
+        TranslateMessage(&Msg);
+        DispatchMessage(&Msg);
+    }
+    GetMessage()    return a positive value indicating there is a message to be processed, and that it has filled in the members of the MSG structure we passed it.
+                    return 0 if it hits WM_QUIT
+                    return a negative value if an error occured
+    
+    TranslateMessage():
+                    this does a bit of additional processing, translating virtual key messages into character messages.
+    DispatchMessage():
+                    what it does is take the message, checks which window it is for and then looks up the Window Procedure for the winodw.
+                    it then calls that procedure, sending as parameters the handle of the window, the message, and wParam and lParam.
+    
